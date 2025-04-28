@@ -16,12 +16,13 @@ if lines:
     for idx, line in enumerate(lines, 1):
         try:
             parts = line.strip().split()
-            if len(parts) != 3:
-                raise ValueError("숫자 포맷 오류가 발생했습니다.")
             
             a = int(parts[0])
             operator = parts[1]
             b = int(parts[2])
+            
+            if int(a) is False or int(b) is False:
+                raise ValueError("숫자 포맷 오류가 발생했습니다.")
             
             if operator == "+":
                 result = a + b
@@ -38,8 +39,8 @@ if lines:
             
             success.append("{} {} {} = {:.1f}".format(a, operator, b, result))
         
-        except ValueError as z:
-            error_message.append("Line {}: 숫자 포멧 오류가 발생했습니다.".format(idx, z))
+        except ValueError:
+            error_message.append("Line {}: 숫자 포멧 오류가 발생했습니다.".format(idx))
         except ArithmeticError as y:
             error_message.append("Line {}: {}".format(idx, y))
         except ZeroDivisionError as z:
@@ -48,7 +49,7 @@ if lines:
             error_message.append("Line {}: 예상치 못한 오류 발생".format(idx))
 
 
-    print("\n계산 결과:")
+    print("계산 결과:")
     for res in success:
         print(res)
 
@@ -56,3 +57,4 @@ if lines:
         print("\n오류가 발생한 줄:")
         for err in error_message:
             print(err)
+
