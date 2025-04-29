@@ -15,11 +15,11 @@ lines = opening_file()
 if lines:
     for idx, line in enumerate(lines, 1):
         try:
+            a, operator, b = line.split()
             parts = line.strip().split()
             
-            a = int(parts[0])
-            operator = parts[1]
-            b = int(parts[2])
+            a = int(a)
+            b = int(b)
             
             if int(a) is False or int(b) is False:
                 raise ValueError("숫자 포맷 오류가 발생했습니다.")
